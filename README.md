@@ -85,3 +85,27 @@ If you want to install this client into another project without publishing it (e
 1. If that project is not using Poetry:
     1. Build a wheel with `poetry build -f wheel`
     1. Install that wheel from the other project `pip install <path-to-wheel>`
+
+## Script to generate code:
+
+```commandline
+#!/usr/bin/env bash
+
+DIR=${1:-.}
+
+mkdir -p $DIR
+
+(
+  cd $DIR
+  curl -s https://dash.readme.com/api/v1/api-registry/5r6sg7sl74xoc30 \
+    | jq '. + {"openapi": "3.0.3"}' > api.json
+  openapi-python-client generate --path api.json --meta setup --config $OLDPWD/config.yml
+  rm api.json
+)
+
+```
+
+`config.yml`:
+```yaml
+project_name_override: ngpvan-api-client
+```
