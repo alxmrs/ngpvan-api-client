@@ -7,7 +7,7 @@ long_description = (here / "README.md").read_text(encoding="utf-8")
 
 setup(
     name="ngpvan-api-client",
-    version="unknown",
+    version="0.0.0",
     description="A client library for accessing VAN CRM",
     long_description=long_description,
     long_description_content_type="text/markdown",
